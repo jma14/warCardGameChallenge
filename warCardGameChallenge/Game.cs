@@ -24,6 +24,19 @@ namespace warCardGameChallenge
 
             Deck = new Deck();
 
+
+        }
+
+        public string playGame()
+        {
+            string result = "";
+            for (int i = 0; i < 20; i++)
+            {
+                Battle battle = new Battle(_player1, _player2);
+                result += battle.doBattle();
+            }
+            return result + getWinner(); ;
+            
         }
 
         public string dealCards()
@@ -50,6 +63,16 @@ namespace warCardGameChallenge
             Deck.Cards.Remove(Deck.Cards.ElementAt(nextCard));
             return result;
 
+        }
+
+        public string getWinner()
+        {
+            string result = "<br/><h4>";
+
+            if (_player1.PlayerDeck.Count() > _player2.PlayerDeck.Count()) result += _player1.Name + " wins!";
+            else if (_player2.PlayerDeck.Count() > _player1.PlayerDeck.Count()) result += _player2.Name + " wins!";
+            else result += "It's a tie!";
+            return result + "</h4>";
         }
     }
 }
