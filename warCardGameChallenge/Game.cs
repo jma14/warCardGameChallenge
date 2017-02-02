@@ -30,12 +30,22 @@ namespace warCardGameChallenge
         public string playGame()
         {
             string result = "";
+            /*
             for (int i = 0; i < 20; i++)
             {
                 Battle battle = new Battle(_player1, _player2);
                 result += battle.doBattle();
             }
-            return result + getWinner(); ;
+            */
+            
+            while (_player1.PlayerDeck.Count() > 0 && _player2.PlayerDeck.Count() > 0)
+            {
+                Battle battle = new Battle(_player1, _player2);
+                result += battle.doBattle();
+            }
+            
+
+            return result + getWinner();
             
         }
 

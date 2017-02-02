@@ -32,25 +32,28 @@ namespace warCardGameChallenge
             Card card2 = new Card();
             card2 = getCard(_player2);
 
+            if (card1 == null || card2 == null) return result;
+
             result += formatDisplayBattleCards(card1, card2);
 
-            string resultBounty = "";
             Player winner = new Player();
             result += compareCards(card1, card2, out winner);
             addCardsToWinnersDeck(winner);
 
-            return result + resultBounty + String.Format("<br/>{0} wins!", winner.Name);
+            return result + String.Format("<br/>{0} wins!", winner.Name);
 
         }
 
         public Card getCard(Player player)
         {
-            if (player.PlayerDeck.ElementAt(0) != null)
+            if (player.PlayerDeck.Count() > 0)
             {
                 Cards.Add(player.PlayerDeck.ElementAt(0));
+                player.PlayerDeck.Remove(player.PlayerDeck.ElementAt(0));
+                return Cards.ElementAt(Cards.Count() - 1);
             }
-            player.PlayerDeck.Remove(player.PlayerDeck.ElementAt(0));
-            return Cards.ElementAt(Cards.Count() - 1);
+            else return null;
+            
         }
 
         public string compareCards(Card card1, Card card2, out Player winner)
@@ -123,6 +126,16 @@ namespace warCardGameChallenge
             {
                 card1 = getCard(_player1);
                 card2 = getCard(_player2);
+            }
+            if (card1 == null)
+            {
+                winner = _player2;
+                return result;
+            }
+            else if (card2 == null)
+            {
+                winner = _player1;
+                return result;
             }
             result += formatDisplayBattleCards(card1, card2);
             compareCards(card1, card2, out winner);
