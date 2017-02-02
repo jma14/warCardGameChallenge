@@ -7,7 +7,7 @@ namespace warCardGameChallenge
 {
     public class Game
     {
-        public Deck Deck { get; set; }
+        private Deck _deck { get; set; }
         private Player _player1;
         private Player _player2;
         private Random _random;
@@ -22,21 +22,14 @@ namespace warCardGameChallenge
 
             _random = new Random();
 
-            Deck = new Deck();
+            _deck = new Deck();
 
 
         }
 
         public string playGame()
         {
-            string result = "";
-            /*
-            for (int i = 0; i < 20; i++)
-            {
-                Battle battle = new Battle(_player1, _player2);
-                result += battle.doBattle();
-            }
-            */
+            string result = dealCards();
             
             while (_player1.PlayerDeck.Count() > 0 && _player2.PlayerDeck.Count() > 0)
             {
@@ -52,7 +45,7 @@ namespace warCardGameChallenge
         public string dealCards()
         {
             string result = "";
-            while (Deck.Cards.Count > 0)
+            while (_deck.Cards.Count > 0)
             {
                 result += getNextCard(_player1);
                 result += getNextCard(_player2);
@@ -63,14 +56,14 @@ namespace warCardGameChallenge
         public string getNextCard(Player player)
         {
             string result = "";
-            int nextCard = _random.Next(Deck.Cards.Count());
-            player.PlayerDeck.Add(Deck.Cards.ElementAt(nextCard));
+            int nextCard = _random.Next(_deck.Cards.Count());
+            player.PlayerDeck.Add(_deck.Cards.ElementAt(nextCard));
             result += String.Format("<br/> {0} is dealt the {1} of {2}",
                 player.Name,
-                Deck.Cards.ElementAt(nextCard).Number,
-                Deck.Cards.ElementAt(nextCard).Suit);
+                _deck.Cards.ElementAt(nextCard).Number,
+                _deck.Cards.ElementAt(nextCard).Suit);
 
-            Deck.Cards.Remove(Deck.Cards.ElementAt(nextCard));
+            _deck.Cards.Remove(_deck.Cards.ElementAt(nextCard));
             return result;
 
         }

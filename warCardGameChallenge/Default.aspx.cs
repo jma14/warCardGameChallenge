@@ -16,13 +16,10 @@ namespace warCardGameChallenge
 
         protected void playButton_Click(object sender, EventArgs e)
         {
-            string result = "";
-            Game game = new Game("Player 1", "Player 2");
-            result += game.dealCards();
-            result += game.playGame();
 
-            resultLabel.Text = result;
-            
+            Game game = new Game("Player 1", "Player 2");
+            resultLabel.Text = game.playGame();
+
         }
     }
 }

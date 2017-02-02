@@ -32,23 +32,23 @@ namespace warCardGameChallenge
 
         public void makeNumbers()
         {
-            for (int i = 1; i <= 10; i++)
+            for (int i = 2; i <= 10; i++)
             {
                 _numbers.Add(i.ToString());
             }
-            _numbers.Add("J");
-            _numbers.Add("Q");
-            _numbers.Add("K");
-            _numbers.Add("A");
+            _numbers.Add("Jack");
+            _numbers.Add("Queen");
+            _numbers.Add("King");
+            _numbers.Add("Ace");
         }
 
         public void makeDeck()
         {
-            for (int i = 0; i < 4; i++)
+            foreach(string suit in _suits)
             {
-                for (int j = 1; j <= 13; j++)
+                foreach (string number in _numbers)
                 {
-                    Cards.Add(new Card { Suit = _suits[i], Number = _numbers[j] });
+                    Cards.Add(new Card { Suit = suit, Number = number });
                 }
             }
         }

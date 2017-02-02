@@ -8,7 +8,6 @@ namespace warCardGameChallenge
     public class Player
     {
         public string Name { get; set; }
-        public int Score { get; set; }
         public List<Card> PlayerDeck { get; set; }
 
         public Player()

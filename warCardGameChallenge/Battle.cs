@@ -7,14 +7,14 @@ namespace warCardGameChallenge
 {
     public class Battle
     {
-        public List<Card> Cards { get; set; }
+        private List<Card> _bounty { get; set; }
         private Player _player1;
         private Player _player2;
 
 
         public Battle(Player player1, Player player2)
         {
-            Cards = new List<Card>();
+            _bounty = new List<Card>();
 
             _player1 = new Player();
             _player1 = player1;
@@ -48,9 +48,9 @@ namespace warCardGameChallenge
         {
             if (player.PlayerDeck.Count() > 0)
             {
-                Cards.Add(player.PlayerDeck.ElementAt(0));
+                _bounty.Add(player.PlayerDeck.ElementAt(0));
                 player.PlayerDeck.Remove(player.PlayerDeck.ElementAt(0));
-                return Cards.ElementAt(Cards.Count() - 1);
+                return _bounty.ElementAt(_bounty.Count() - 1);
             }
             else return null;
             
@@ -82,20 +82,20 @@ namespace warCardGameChallenge
 
         public int convertCard(string card)
         {
-            if (card == "J") return 11;
-            else if (card == "Q") return 12;
-            else if (card == "K") return 13;
-            else if (card == "A") return 14;
+            if (card == "Jack") return 11;
+            else if (card == "Queen") return 12;
+            else if (card == "King") return 13;
+            else if (card == "Ace") return 14;
             else return int.Parse(card);
         }
 
         public void addCardsToWinnersDeck(Player player)
         {
-            foreach (Card card in Cards)
+            foreach (Card card in _bounty)
             {
                 player.PlayerDeck.Add(card);
             }
-            Cards.Clear();
+            _bounty.Clear();
         }
 
         public string formatDisplayBattleCards(Card card1, Card card2)
@@ -110,7 +110,7 @@ namespace warCardGameChallenge
         {
             string result = "";
             result += String.Format("<br/>Bounty...");
-            foreach (Card card in Cards)
+            foreach (Card card in _bounty)
             {
                 result += String.Format("<br/>&nbsp{0} of {1}", card.Number, card.Suit);
             }
