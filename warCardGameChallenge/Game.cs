@@ -80,8 +80,7 @@ namespace warCardGameChallenge
             string result = "<br/><h4>";
 
             if (_player1.PlayerDeck.Count() > _player2.PlayerDeck.Count()) result += _player1.Name + " wins!";
-            else if (_player2.PlayerDeck.Count() > _player1.PlayerDeck.Count()) result += _player2.Name + " wins!";
-            else result += "It's a tie!";
+            else result += _player2.Name + " wins!";
             return result + "</h4>";
         }
     }
